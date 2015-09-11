@@ -2,7 +2,7 @@
 # Inspired by https://github.com/michaeljsmalley/dotfiles/blob/master/makesymlinks.sh
 
 dir=~/dotfiles
-files="profile vimrc vim bin tmux.conf"
+files="profile bashrc vimrc vim bin tmux.conf"
 
 echo -n "Changing to the $dir directory for correct symlinks ... "
 cd $dir
