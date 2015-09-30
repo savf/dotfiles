@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 # Inspired by https://github.com/michaeljsmalley/dotfiles/blob/master/makesymlinks.sh
 
 dir=~/dotfiles
