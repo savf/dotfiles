@@ -2,7 +2,7 @@
 # Inspired by https://github.com/michaeljsmalley/dotfiles/blob/master/makesymlinks.sh
 
 dir=~/dotfiles
-files="profile bashrc vimrc vim bin tmux.conf lessfilter"
+files="profile bashrc vimrc vim bin tmux.conf lessfilter gitconfig"
 
 echo -n "Changing to the $dir directory for correct symlinks ... "
 cd $dir
