@@ -158,9 +158,14 @@ function cdls {
     # -p is for / after directories
     # -x is for columns
     # CLICOLOR_FORCE and COLUMNS is for ls
-	# Add --color to ls for Linux systems
+    # Add --color to ls for Linux systems
     DISPLAY_LINES=20
-    LSCMD="CLICOLOR_FORCE=1 COLUMNS=$(tput cols) ls --color -Gap -x "
+    OS=`uname -s | sed -e 's/  */-/g;y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/'`
+    if [ "$OS" = "darwin" ] || [ "$OS" = "freebsd" ]; then
+        LSCMD="CLICOLOR_FORCE=1 COLUMNS=$(tput cols) ls -Gp -x "
+    else
+        LSCMD="CLICOLOR_FORCE=1 COLUMNS=$(tput cols) ls --color -Gap -x "
+    fi
     DIR="$@"  
 
     GIT_CMD="git -c color.status=always status -bs 2>/dev/null"

@@ -107,9 +107,14 @@ fi
 PROMPT_COMMAND='pwd2=$(sed "s:\([^/]\)[^/]*/:\1/:g" <<<$PWD)'
 PS1='\[\e[01;30m\]\A \[\e[1;49;35m\]\h \[\e[01;34m\]$pwd2 \[\e[00m\]\$ '
 
+gpip(){
+  PIP_REQUIRE_VIRTUALENV="" pip "$@"
+}
+
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export VISUAL=vim
 export EDITOR="$VISUAL"
+export PIP_REQUIRE_VIRTUALENV=true
 alias necksafe="source ~/.bin/alwaysontop.sh"
 alias howmuch="du -hs"
