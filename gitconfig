@@ -3,3 +3,7 @@
 # Please adapt and uncomment the following lines:
 	name = Stephan Mannhart
 	email = stephan.mannhart@googlemail.com
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
