@@ -76,7 +76,9 @@ gpip(){
 if [ -f /usr/share/autojump/autojump.sh ]; then
 	. /usr/share/autojump/autojump.sh
 fi
-[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+if [ -f /usr/local/bin/brew ]; then
+  [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+fi
 
 ############################################################################
 # PROMPT                                                                   #
