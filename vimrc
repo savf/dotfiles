@@ -3,6 +3,8 @@ set background=light
 colorscheme solarized
 " turn on line numbers
 set nu
+" turn on relativenumber
+set relativenumber
 " remap : to ; for less typing
 nnoremap ; :
 " define tab size as 4 spaces
