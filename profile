@@ -31,3 +31,7 @@ PS1='\[\e[01;30m\]\A \[\e[1;49;35m\]\h \[\e[01;34m\]$pwd2 \[\e[00m\]\$ '
 
 alias necksafe="source ~/.bin/alwaysontop.sh"
 alias howmuch="du -hs"
+
+# Locale settings
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
