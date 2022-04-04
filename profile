@@ -29,7 +29,6 @@ export LESSOPEN='|~/.lessfilter %s'
 PROMPT_COMMAND='pwd2=$(sed "s:\([^/]\)[^/]*/:\1/:g" <<<$PWD)'
 PS1='\[\e[01;30m\]\t \[\e[1;49;35m\]\u@\h \[\e[00;34m\]$pwd2 \[\e[00m\]\$ '
 
-alias necksafe="source ~/.bin/alwaysontop.sh"
 alias howmuch="du -hs"
 
 # Locale settings

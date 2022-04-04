@@ -23,7 +23,6 @@ fi
 alias ll='ls -alhF'
 alias la='ls -A'
 alias l='ls -CF'
-alias necksafe="source ~/.bin/alwaysontop.sh"
 alias howmuch="du -hs"
 
 # Add an "alert" alias for long running commands.  Use like so:
