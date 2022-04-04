@@ -1,10 +1,17 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
   export ZSH=~/.oh-my-zsh
 
-ZSH_THEME="savf"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -48,11 +55,16 @@ ZSH_THEME="savf"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git, zsh-autosuggestions)
+plugins=(git, zsh-autosuggestions, zsh-kubectl-prompt)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+. $(brew --prefix)/opt/asdf/libexec/asdf.sh
+export K8S_DEV_NAMESPACE='mannhart'
+export SLACK_USER_EMAIL='stephan.mannhart@starmind.com'
+export ASDF_KUBECTL_OVERWRITE_ARCH=amd64
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -72,6 +84,26 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
+# User functions
+
+function k_node_memory_usage {
+  local pods=()
+  for namespace pod in $(kubectl get po -A -owide | grep $1 | awk '{print $1, $2}');
+  do
+    pods+=($(kubectl top pod --no-headers -n $namespace $pod 2> /dev/null))
+  done;
+  printf '%s %s %s\n' $pods | sort --key 3 -nr | column -t
+}
+
+function k_node_cpu_usage {
+  local pods=()
+  for namespace pod in $(kubectl get po -A -owide | grep $1 | awk '{print $1, $2}');
+  do
+    pods+=($(kubectl top pod --no-headers -n $namespace $pod 2> /dev/null))
+  done;
+  printf '%s %s %s\n' $pods | sort --key 2 -nr | column -t
+}
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -80,3 +112,25 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+source ~/.aliases
+
+source <(kubectl completion zsh)
+compdef __start_kubectl k
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
