@@ -113,6 +113,7 @@ function k_node_cpu_usage {
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source ~/.aliases
+source ~/almostontop/almostontop.plugin.zsh
 
 source <(kubectl completion zsh)
 compdef __start_kubectl k
