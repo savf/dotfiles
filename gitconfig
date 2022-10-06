@@ -10,5 +10,6 @@
 	process = git-lfs filter-process
 [core]
   editor = code --wait
+	hooksPath = /Users/stephanmannhart/.git_template/hooks
 [diff]
   tool = opendiff

@@ -6,12 +6,24 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.bin:/usr/local/bin:$PATH
+export PATH=/usr/local/bin:$PATH
+export PATH=$PATH:~/.bin
 
 # Path to your oh-my-zsh installation.
   export ZSH=~/.oh-my-zsh
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# Bash and Zsh
+# if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
+##### WHAT YOU WANT TO DISABLE FOR WARP - BELOW
+
+#  ZSH_THEME="powerlevel10k/powerlevel10k"
+
+##### WHAT YOU WANT TO DISABLE FOR WARP - ABOVE
+# else
+  
+  eval "$(starship init zsh)"
+
+# fi
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -65,6 +77,8 @@ source $ZSH/oh-my-zsh.sh
 export K8S_DEV_NAMESPACE='mannhart'
 export SLACK_USER_EMAIL='stephan.mannhart@starmind.com'
 export ASDF_KUBECTL_OVERWRITE_ARCH=amd64
+export do='--dry-run=client -o yaml'
+export now='--force --grace-period 0'
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -104,6 +118,9 @@ function k_node_cpu_usage {
   printf '%s %s %s\n' $pods | sort --key 2 -nr | column -t
 }
 
+# Only include successful commands in the history
+zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -115,7 +132,7 @@ function k_node_cpu_usage {
 source ~/.aliases
 
 # Source almostontop if it exists
-[[ ! -f ~/almostontop/almostontop.plugin.zsh ]] || source ~/almostontop/almostontop.plugin.zsh
+# [[ ! -f ~/almostontop/almostontop.plugin.zsh ]] || source ~/almostontop/almostontop.plugin.zsh
 
 source <(kubectl completion zsh)
 compdef __start_kubectl k
@@ -137,3 +154,9 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
