@@ -2,7 +2,7 @@
 # Inspired by https://github.com/michaeljsmalley/dotfiles/blob/master/makesymlinks.sh
 
 dir=~/dotfiles
-files="profile bashrc vimrc vim bin tmux.conf lessfilter gitconfig zshrc p10k.zsh config/starship.toml"
+files="profile bashrc vimrc vim bin tmux.conf lessfilter gitconfig kubectl_aliases zshrc config/starship.toml config/yabai/yabairc"
 
 echo -n "Changing to the $dir directory for correct symlinks ... "
 cd $dir

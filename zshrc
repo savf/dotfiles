@@ -74,11 +74,12 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 . $(brew --prefix)/opt/asdf/libexec/asdf.sh
-export K8S_DEV_NAMESPACE='mannhart'
+export K8S_DEV_NAMESPACE='savf'
 export SLACK_USER_EMAIL='stephan.mannhart@starmind.com'
-export ASDF_KUBECTL_OVERWRITE_ARCH=amd64
+export ANSIBLE_TIMEOUT=120
 export do='--dry-run=client -o yaml'
 export now='--force --grace-period 0'
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -125,11 +126,10 @@ zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-source ~/.aliases
+[ -f ~/.aliases ] && source ~/.aliases
+
+# Source kubectl aliases like 'kgsvcwn'
+[ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
 
 # Source almostontop if it exists
 # [[ ! -f ~/almostontop/almostontop.plugin.zsh ]] || source ~/almostontop/almostontop.plugin.zsh
