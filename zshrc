@@ -1,6 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=/usr/local/bin:$PATH
-export PATH=$PATH:~/.bin
+export PATH=/usr/local/bin:~/.bin:~/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
   export ZSH=~/.oh-my-zsh
@@ -41,7 +40,7 @@ export PATH=$PATH:~/.bin
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+ COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -56,11 +55,14 @@ export PATH=$PATH:~/.bin
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# Kubectx/kubens autocompletion
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions)
+plugins=(git zsh-autosuggestions kubectl-autocomplete)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -92,6 +94,9 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
+zstyle ':completion:*:ssh:*' hosts
+compdef mosh=ssh
+
 # User functions
 
 function k_node_memory_usage {
@@ -120,9 +125,6 @@ function k_node_cpu_usage {
 
 # Source kubectl aliases like 'kgsvcwn'
 [ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
-
-source <(kubectl completion zsh)
-compdef __start_kubectl k
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
