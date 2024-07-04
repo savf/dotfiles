@@ -62,9 +62,12 @@ FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions kubectl-autocomplete)
+plugins=(git kubectl-autocomplete)
 
 source $ZSH/oh-my-zsh.sh
+
+# ZSH autosuggestions
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # User configuration
 
@@ -146,3 +149,4 @@ export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
