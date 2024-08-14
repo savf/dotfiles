@@ -78,6 +78,7 @@ export ANSIBLE_TIMEOUT=120
 export do='--dry-run=client -o yaml'
 export now='--force --grace-period 0'
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_vault_password
 
 # export MANPATH="/usr/local/man:$MANPATH"
 

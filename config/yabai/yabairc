@@ -24,6 +24,7 @@ yabai -m rule --add app="^Activity Monitor$" sticky=on layer=above manage=off
 yabai -m rule --add app="^OBSBOT_WebCam$" manage=off
 yabai -m rule --add app="^FaceTime$" manage=off
 yabai -m rule --add app="^ImageOptim$" manage=off
+yabai -m rule --add app="^VNC Viewer$" sticky=on layer=above manage=off
 
 #find ~/Library/Parallels/Applications\ Menus/ -maxdepth 3 -type f | awk -F'/' '{ print $NF; }' | awk '{$1=$1};1' | sort | uniq | tr "\n" "\0" | xargs -0 -I{} yabai -m rule --add app="^{}\$" title=".*" manage=on
 
@@ -72,8 +73,7 @@ yabai -m window --focus stack.prev
 yabai -m window --focus stack.next
 yabai -m window --focus stack.recent
 yabai -m window --focus stack.last
-yabai -m config --space 2 layout bsp
-yabai -m config --space 3 layout float
+yabai -m config --space 2 layout float
 yabai -m config top_padding 10
 yabai -m config bottom_padding 10
 yabai -m config left_padding 10
