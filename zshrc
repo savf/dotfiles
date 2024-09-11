@@ -79,6 +79,7 @@ export do='--dry-run=client -o yaml'
 export now='--force --grace-period 0'
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.ansible_vault_password
+export PATH="$PATH:/Users/savf/.rustup/toolchains/nightly-2024-06-08-aarch64-apple-darwin/bin:/Users/savf/.cargo/bin"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
